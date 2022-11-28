@@ -18,17 +18,19 @@
 
 //            %[$][flags][width][.precision]conversion
 
-/*void	init_var(t_var_print *var)
-{
-	var->res = 0;
-	var->flagzero = 0;
-	var->precision = 0;
-	var->width = 0;
-	var->flagplus = 0;
-	var->flagminus = 0;
-	var->flaghash = 0;
-	var->flagspace = 0;
-}*/
+// void	init_var(t_var_print *var)
+// {
+// 	var->res = 0;
+// 	var->flagzero = 0;
+// 	var->precision = 0;
+// 	var->width = 0;
+// 	var->flagplus = 0;
+// 	var->flagminus = 0;
+// 	var->flaghash = 0;
+// 	var->flagspace = 0;
+// }
+
+// void	check_flag_
 
 // int	ft_printf(const char *format, ...)
 // {
@@ -43,14 +45,15 @@
 // 	{
 // 		if (*(format + i) == '%')
 // 		{
-
+// 			check_
 // 		}
 // 		else
 // 		{
 // 			ft_putchar_fd(*(format + i),1);
+// 			var->res++;
 // 		}
 // 	}
-
+// }
 
 // }
 // Variadic function to add numbers
@@ -96,7 +99,8 @@ int main()
 
     printf("\n");
 
-    int b = 12;
+	int	b = 12;
+	int	c;
     printf("|%d|\n",10);
     //flag '+' - display + before positive number and - before negative number
     printf("|%+d|\n",10);
@@ -107,12 +111,13 @@ int main()
     printf("|%0 10d|\n", b);
     printf("|%0+10d|\n", b);
     printf("|%- 10d|\n", b);
-    printf("|%-+10d|\n", b);
+    c = printf("|%-+10d|\n", b);
+	printf("%d\n",c);
     //flag ' ' - give space before number. If it is negative doenst give the space
     printf("|% d|\n",11);
     printf("|% d|\n",-11);
-    //flag '-' - left justify of the output
-    printf("|%6d|\n",11);
+    printf("flag '-' - left justify of the output\n");
+    printf("|%.d|\n",11);
     printf("|%-6d|\n",11);
     printf("|%-6d|\n",-11);
     //flag '#' - prefix 0 to the octal value and 0x to the hexadecimal value
@@ -124,11 +129,14 @@ int main()
     //flag '0' - Pad a field with leading zeros.
     printf("|%d|\n",11);
     printf("|%05d|\n",11);
+	printf("|%-10x|\n",11);
     // printf("|%-05d|\n",11);
-    //precision '.'
+    printf("precision '.'\n");
     printf("|%d|\n",11);
-    printf("|%.2d|\n",11111); //it doesnt do anything.
+    //printf("|%.p|\n",&b); error
+    printf("|%.d|\n",11111); //it doesnt do anything.
     printf("|%.s|\n","11111"); // if doest give any number for precision, it considers 0
+    printf("|%.s|\n","a");
     printf("|%.3s|\n","11111");
     printf("|%2.5s|\n","1");
     printf("|%-2.5s|\n","1");
@@ -153,6 +161,6 @@ int main()
 
     int a = printf("%d",-12345);
     printf("\n%d\n",a);
-
+    printf("%%\n");
 }
 
