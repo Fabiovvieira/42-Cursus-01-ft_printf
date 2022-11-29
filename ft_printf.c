@@ -32,9 +32,29 @@ void	init_var(t_var_print *var)
 	var->specifier = 0;
 }
 
-int	read_format(char **format, va_list *arg, t_var_print *var)
+int	ft_print_conversion(va_list *arg, t_var_print *var)
 {
-	while (!(ft_strchr(SPECIFIER, **format)))
+	if (var->specifier == 'd' || var->specifier == 'i')
+
+	else if (var->specifier == 'u')
+
+	else if (var->specifier == 'c')
+
+	else if (var->specifier == 's')
+
+	else if (var->specifier == 'p')
+
+	else if (var->specifier == 'x')
+
+	else if (var->specifier == 'X')
+
+	else if (var->specifier == '%')
+}
+
+int	read_format(char const **format, va_list *arg, t_var_print *var)
+{
+	int	count;
+	while (!(ft_strchr(SPECIFIER, **format)) && !(**format >= '1' && **format <= '9') && **format != '.')
 	{
 		if(**format == '-')
 			var->flagminus = 1;
@@ -46,14 +66,32 @@ int	read_format(char **format, va_list *arg, t_var_print *var)
 			var->flaghash = 1;
 		else if(**format == '0')
 			var->flagzero = 1;
-		else if(**format == '.')
-		{
-			var->flagdot = 1;
-
-		}
-		else if(**format >= '0' && **format <= '9')
-
+		(*format)++;
 	}
+	while (!(ft_strchr(SPECIFIER, **format)) && **format != '.')
+	{
+		if(**format >= '0' && **format <= '9')
+			var->width = var->width * 10 + (**format - 48);
+		(*format)++;
+	}
+	while (!(ft_strchr(SPECIFIER, **format)) && !(**format >= '0' && **format <= '9') )
+	{
+		if(**format == '.')
+			var->flagdot = 1;
+		(*format)++;
+	}
+	while (!(ft_strchr(SPECIFIER, **format)))
+	{
+		printf("ola");
+		if(**format >= '0' && **format <= '9')
+			var->precision = var->precision * 10 + (**format - 48);
+		(*format)++;
+	}
+	var->specifier = **format;
+	count = ft_print_conversion(arg, var);
+	// (void)arg;
+	count = 1;
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -79,6 +117,7 @@ int	ft_printf(const char *format, ...)
 		}
 		format++;
 	}
+	printf("\n|dot = %d\n|hash = %d\n|minus = %d\n|plus = %d\n|space = %d\n|zero = %d\n|precision = %d\n|res = %d\n|specifier = %c\n|width = %d|\n",var.flagdot,var.flaghash,var.flagminus,var.flagplus,var.flagspace,var.flagzero,var.precision,var.res,var.specifier,var.width);
 	va_end(arg);
 	return (count);
 }
@@ -86,7 +125,8 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	int	a;
-	a = ft_printf("fabio");
+	a = ft_printf("12345%+-0 #101.101d12345");
+	printf("\n%d\n",a);
 	return(0);
 }
 
