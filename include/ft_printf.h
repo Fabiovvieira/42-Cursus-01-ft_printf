@@ -14,19 +14,25 @@
 
 #define FT_PRINTF_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include "libft.h"
+
+
+# define SPECIFIER "cspdiuxX%"
 
 typedef struct s_var_print {
-	int	res;
-	int	flagzero;
-	int	precision;
-	int	width;
-	int	flagplus;
-	int	flagminus;
-	int	flaghash;
-	int	flagspace;
+	int		res;
+	int		flagzero;
+	int		precision;
+	int		flagdot;
+	int		width;
+	int		flagplus;
+	int		flagminus;
+	int		flaghash;
+	int		flagspace;
+	char	specifier;
 } t_var_print;
 
 int	ft_printf(const char *format, ...);
