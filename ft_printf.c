@@ -130,10 +130,13 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	int	a,b;
-	a = ft_printf(" %p \n", 100);
-	b = printf(" %p \n", 100);
-	printf("\n%d\n",a);
-	printf("\n%d\n",b);
+	int *d;
+	int c = 12;
+	d = &c;
+	a = ft_printf(" %p \n", d);
+	b = printf(" %p \n", d);
+	printf("%d\n",a);
+	printf("%d\n",b);
 	return(0);
 }
 

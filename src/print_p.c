@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:03 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/11/30 17:50:27 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:22:08 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*ft_itoa_hex(unsigned long long n)
 		nb[0] = '0';
 	while (num > 0)
 	{
-		nb[len - 1] = "0123456789abcdef"[num % 10];
+		nb[len - 1] = "0123456789abcdef"[num % 16];
 		num = num / 16;
 		len --;
 	}
@@ -51,14 +51,16 @@ static char	*ft_itoa_hex(unsigned long long n)
 
 int	print_p(t_var_print *var, unsigned long long hex)
 {
-	int		count;
+	// int		count;
 	char	*num;
 	char	*res;
 
 	(void)var;
-	count = 0;
+	// count = 0;
 	num = ft_itoa_hex(hex);
+	// printf("%llu\n",hex);
 	res = ft_strjoin("0x", num);
-	printf("res =%s\n", res);
-	return (count);
+	printf("%s", res); // desenvolver o print_s e utilizar aqui
+
+	return (ft_strlen(res));
 }
