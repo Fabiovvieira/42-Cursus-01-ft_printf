@@ -37,5 +37,7 @@ typedef struct s_var_print {
 
 int	ft_printf(const char *format, ...);
 
+int	print_c(t_var_print *var, unsigned char c);
+
 
 #endif

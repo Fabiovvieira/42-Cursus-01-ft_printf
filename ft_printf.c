@@ -34,21 +34,23 @@ void	init_var(t_var_print *var)
 
 int	ft_print_conversion(va_list *arg, t_var_print *var)
 {
-	if (var->specifier == 'd' || var->specifier == 'i')
+	if (var->specifier == 'c')
+		return(print_c(var, va_arg(*arg, int)));
+	// else if (var->specifier == '%')
+	// 	return(print_per(var));
+	// else if (var->specifier == 'd' || var->specifier == 'i')
+	// 	return(print_d(var, va_arg(*arg, int)));
+	// else if (var->specifier == 'u')
+	// 	return(print_u(var, va_arg(*arg, unsigned int)));
 
-	else if (var->specifier == 'u')
+	// else if (var->specifier == 's')
+	// 	return(print_s(var, va_arg(*arg, char *)));
+	// else if (var->specifier == 'p')
+	// 	return(print_p(var, va_arg(*arg, unsigned long long)));
+	// else if (var->specifier == 'x' || var->specifier == 'X')
+	// 	return(print_xX(var, va_arg(*arg, unsigned int)));
 
-	else if (var->specifier == 'c')
-
-	else if (var->specifier == 's')
-
-	else if (var->specifier == 'p')
-
-	else if (var->specifier == 'x')
-
-	else if (var->specifier == 'X')
-
-	else if (var->specifier == '%')
+	return (0);
 }
 
 int	read_format(char const **format, va_list *arg, t_var_print *var)
@@ -90,7 +92,7 @@ int	read_format(char const **format, va_list *arg, t_var_print *var)
 	var->specifier = **format;
 	count = ft_print_conversion(arg, var);
 	// (void)arg;
-	count = 1;
+	// count = 1;
 	return (count);
 }
 
@@ -99,6 +101,7 @@ int	ft_printf(const char *format, ...)
 	va_list		arg;
 	t_var_print	var;
 	int			count;
+	int			size;
 
 	count = 0;
 	init_var(&var);
@@ -108,7 +111,9 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			count += read_format(&format, &arg, &var);
+			size = read_format(&format, &arg, &var);
+			count += size;
+
 		}
 		else
 		{
@@ -117,16 +122,22 @@ int	ft_printf(const char *format, ...)
 		}
 		format++;
 	}
-	printf("\n|dot = %d\n|hash = %d\n|minus = %d\n|plus = %d\n|space = %d\n|zero = %d\n|precision = %d\n|res = %d\n|specifier = %c\n|width = %d|\n",var.flagdot,var.flaghash,var.flagminus,var.flagplus,var.flagspace,var.flagzero,var.precision,var.res,var.specifier,var.width);
+	// printf("\n|dot = %d\n|hash = %d\n|minus = %d\n|plus = %d\n|space = %d\n|zero = %d\n|precision = %d\n|res = %d\n|specifier = %c\n|width = %d|\n",var.flagdot,var.flaghash,var.flagminus,var.flagplus,var.flagspace,var.flagzero,var.precision,var.res,var.specifier,var.width);
 	va_end(arg);
 	return (count);
 }
 
 int	main(void)
 {
-	int	a;
-	a = ft_printf("12345%+-0 #101.101d12345");
+	int	a, b;
+	a = ft_printf("|%10c|\n",'a');
+	b = printf("|%10c|\n",'a');
 	printf("\n%d\n",a);
+	printf("\n%d\n",b);
+
+
+
+
 	return(0);
 }
 
