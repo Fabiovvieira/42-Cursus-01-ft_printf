@@ -36,8 +36,10 @@ int	ft_print_conversion(va_list *arg, t_var_print *var)
 {
 	if (var->specifier == 'c')
 		return(print_c(var, va_arg(*arg, int)));
-	// else if (var->specifier == '%')
-	// 	return(print_per(var));
+	else if (var->specifier == '%')
+		return(print_per(var));
+	else if (var->specifier == 'p')
+		return(print_p(var, va_arg(*arg, unsigned long long)));
 	// else if (var->specifier == 'd' || var->specifier == 'i')
 	// 	return(print_d(var, va_arg(*arg, int)));
 	// else if (var->specifier == 'u')
@@ -45,8 +47,7 @@ int	ft_print_conversion(va_list *arg, t_var_print *var)
 
 	// else if (var->specifier == 's')
 	// 	return(print_s(var, va_arg(*arg, char *)));
-	// else if (var->specifier == 'p')
-	// 	return(print_p(var, va_arg(*arg, unsigned long long)));
+
 	// else if (var->specifier == 'x' || var->specifier == 'X')
 	// 	return(print_xX(var, va_arg(*arg, unsigned int)));
 
@@ -104,16 +105,15 @@ int	ft_printf(const char *format, ...)
 	int			size;
 
 	count = 0;
-	init_var(&var);
 	va_start(arg, format);
 	while (*format)
 	{
 		if (*format == '%')
 		{
+			init_var(&var);
 			format++;
 			size = read_format(&format, &arg, &var);
 			count += size;
-
 		}
 		else
 		{
@@ -129,15 +129,11 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	int	a, b;
-	a = ft_printf("|%10c|\n",'a');
-	b = printf("|%10c|\n",'a');
+	int	a,b;
+	a = ft_printf(" %p \n", 100);
+	b = printf(" %p \n", 100);
 	printf("\n%d\n",a);
 	printf("\n%d\n",b);
-
-
-
-
 	return(0);
 }
 
