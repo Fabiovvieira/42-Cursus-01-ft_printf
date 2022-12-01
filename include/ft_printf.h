@@ -48,6 +48,8 @@ int	print_s(t_var_print *var, char *str);
 
 int	print_u(t_var_print *var, unsigned int num);
 
+int	print_d(t_var_print *var, int num);
+
 char	*ft_left_pad_space(t_var_print *var, char *res);
 
 char	*ft_right_pad_space(t_var_print *var, char *res);

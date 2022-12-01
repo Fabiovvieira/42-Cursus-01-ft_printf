@@ -42,15 +42,10 @@ int	ft_print_conversion(va_list *arg, t_var_print *var)
 		return(print_s(var, va_arg(*arg, char *)));
 	else if (var->specifier == 'u')
 		return(print_u(var, va_arg(*arg, unsigned int)));
-	// else if (var->specifier == 'd' || var->specifier == 'i')
-	// 	return(print_d(var, va_arg(*arg, int)));
-
-
-
-
+	else if (var->specifier == 'd' || var->specifier == 'i')
+		return(print_d(var, va_arg(*arg, int)));
 	// else if (var->specifier == 'x' || var->specifier == 'X')
 	// 	return(print_xX(var, va_arg(*arg, unsigned int)));
-
 	return (0);
 }
 
@@ -126,15 +121,15 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	// int	a;
+	int	a;
 	int	b;
 	// int *d;
 	// int c = 12;
 	// d = &c;
 
-	// a = ft_printf("|%10.s|\n", "fabio");
-	b = printf("|%u|\n", 123456789);
-	// printf("%d\n",a);
+	a = ft_printf("|%20.15u|\n", 123456789);
+	b = printf("|%20.15u|\n", 123456789);
+	printf("%d\n",a);
 	printf("%d\n",b);
 	return(0);
 }

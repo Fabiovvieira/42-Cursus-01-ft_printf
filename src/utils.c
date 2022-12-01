@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:04:29 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/01 10:48:43 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:35:19 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_left_pad_zero(t_var_print *var, char *res)
 	{
 		tmp = (char *)malloc(sizeof(char)* (var->width + 1));
 		while (i < (var->width - size))
-			*(tmp + i++) = ' ';
+			*(tmp + i++) = '0';
 		while (i < var->width)
 			*(tmp + i++) = *(res++);
 		*(tmp + i) = *(res);
