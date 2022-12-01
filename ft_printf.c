@@ -13,9 +13,7 @@
 #include<stdio.h>
 #include "ft_printf.h"
 
-
 // The overall syntax of a conversion specification is:
-
 //            %[$][flags][width][.precision]conversion
 
 void	init_var(t_var_print *var)
@@ -40,13 +38,15 @@ int	ft_print_conversion(va_list *arg, t_var_print *var)
 		return(print_per(var));
 	else if (var->specifier == 'p')
 		return(print_p(var, va_arg(*arg, unsigned long long)));
+	else if (var->specifier == 's')
+		return(print_s(var, va_arg(*arg, char *)));
+	else if (var->specifier == 'u')
+		return(print_u(var, va_arg(*arg, unsigned int)));
 	// else if (var->specifier == 'd' || var->specifier == 'i')
 	// 	return(print_d(var, va_arg(*arg, int)));
-	// else if (var->specifier == 'u')
-	// 	return(print_u(var, va_arg(*arg, unsigned int)));
 
-	// else if (var->specifier == 's')
-	// 	return(print_s(var, va_arg(*arg, char *)));
+
+
 
 	// else if (var->specifier == 'x' || var->specifier == 'X')
 	// 	return(print_xX(var, va_arg(*arg, unsigned int)));
@@ -85,15 +85,12 @@ int	read_format(char const **format, va_list *arg, t_var_print *var)
 	}
 	while (!(ft_strchr(SPECIFIER, **format)))
 	{
-		printf("ola");
 		if(**format >= '0' && **format <= '9')
 			var->precision = var->precision * 10 + (**format - 48);
 		(*format)++;
 	}
 	var->specifier = **format;
 	count = ft_print_conversion(arg, var);
-	// (void)arg;
-	// count = 1;
 	return (count);
 }
 
@@ -129,13 +126,15 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	int	a,b;
-	int *d;
-	int c = 12;
-	d = &c;
-	a = ft_printf(" %p \n", d);
-	b = printf(" %p \n", d);
-	printf("%d\n",a);
+	// int	a;
+	int	b;
+	// int *d;
+	// int c = 12;
+	// d = &c;
+
+	// a = ft_printf("|%10.s|\n", "fabio");
+	b = printf("|%u|\n", 123456789);
+	// printf("%d\n",a);
 	printf("%d\n",b);
 	return(0);
 }

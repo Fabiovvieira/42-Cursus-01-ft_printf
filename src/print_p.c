@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:03 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/11/30 18:22:08 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:52:55 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,24 @@ static char	*ft_itoa_hex(unsigned long long n)
 
 int	print_p(t_var_print *var, unsigned long long hex)
 {
-	// int		count;
 	char	*num;
 	char	*res;
+	char	*tmp;
 
-	(void)var;
-	// count = 0;
 	num = ft_itoa_hex(hex);
-	// printf("%llu\n",hex);
 	res = ft_strjoin("0x", num);
-	printf("%s", res); // desenvolver o print_s e utilizar aqui
-
+	if (var->flagminus)
+	{
+		tmp = ft_right_pad_space(var, res);
+		free (res);
+		res = tmp;
+	}
+	else
+	{
+		tmp = ft_left_pad_space(var, res);
+		free (res); // verificar se deve dar free no tmp e no res
+		res = tmp;
+	}
+	write(1, res, ft_strlen(res));
 	return (ft_strlen(res));
 }

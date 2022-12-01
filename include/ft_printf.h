@@ -44,4 +44,14 @@ int	print_per(t_var_print *var);
 
 int	print_p(t_var_print *var, unsigned long long hex);
 
+int	print_s(t_var_print *var, char *str);
+
+int	print_u(t_var_print *var, unsigned int num);
+
+char	*ft_left_pad_space(t_var_print *var, char *res);
+
+char	*ft_right_pad_space(t_var_print *var, char *res);
+
+char	*ft_left_pad_zero(t_var_print *var, char *res);
+
 #endif
