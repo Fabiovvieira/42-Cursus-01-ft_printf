@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:47:56 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/01 18:33:37 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:16:21 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ int	print_s(t_var_print *var, char *str)
 		res = tmp;
 	}
 	write(1, res, ft_strlen(res));
-	return (ft_strlen(str));
+	return (ft_strlen(res));
 }

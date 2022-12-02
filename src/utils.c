@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:04:29 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/01 18:35:19 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:29:24 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*ft_left_pad_zero(t_var_print *var, char *res)
 
 	i = 0;
 	size = ft_strlen(res);
+	if ((var->specifier == 'x' || var->specifier == 'x') && var->flaghash)
+		size += 2;
 	tmp = ft_strdup(res);
 	if (var->width > size)
 	{
@@ -75,5 +77,33 @@ char	*ft_left_pad_zero(t_var_print *var, char *res)
 			*(tmp + i++) = *(res++);
 		*(tmp + i) = *(res);
 	}
+	return (tmp);
+}
+
+char	*ft_num_with_precision(t_var_print *var, char *res)
+{
+	char	*tmp;
+	int		size;
+	int		i;
+
+	i = 0;
+	if (res[0] == '0')
+		return (ft_strdup(""));
+	size = ft_strlen(res);
+	tmp = (char *)malloc(sizeof(char)* (var->precision + 1));
+	while (i < (var->precision - size))
+		*(tmp + i++) = '0';
+	while (i < var->precision)
+		*(tmp + i++) = *(res++);
+	*(tmp + i) = *(res);
+	return (tmp);
+}
+
+char	*ft_add_sign_space(char *res, char *sign)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(sign, res);
+	free(res);
 	return (tmp);
 }

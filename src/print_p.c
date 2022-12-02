@@ -6,13 +6,13 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:03 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/01 10:52:55 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:29:12 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_itoa_hex_len(unsigned long long n)
+int	ft_itoa_hex_len(unsigned long long n)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ static int	ft_itoa_hex_len(unsigned long long n)
 	return (len);
 }
 
-static char	*ft_itoa_hex(unsigned long long n)
+char	*ft_itoa_hex(unsigned long long n)
 {
 	int					len;
 	unsigned long long	num;
@@ -48,7 +48,6 @@ static char	*ft_itoa_hex(unsigned long long n)
 	return (nb);
 }
 
-
 int	print_p(t_var_print *var, unsigned long long hex)
 {
 	char	*num;
@@ -66,7 +65,7 @@ int	print_p(t_var_print *var, unsigned long long hex)
 	else
 	{
 		tmp = ft_left_pad_space(var, res);
-		free (res); // verificar se deve dar free no tmp e no res
+		free (res);
 		res = tmp;
 	}
 	write(1, res, ft_strlen(res));
