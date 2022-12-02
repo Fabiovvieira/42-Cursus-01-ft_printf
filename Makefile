@@ -8,7 +8,7 @@ SRCDIR = ./src/
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I $
+CFLAGS = -Wall -Wextra -Werror -I $(LIBDIR)
 
 SRC = ft_printf.c \
 		print_c.c \
@@ -24,17 +24,21 @@ SRCS = $(addprefix ${SRCDIR}, ${SRC})
 
 OBJ_SRCS = $(SRCS:.c=.o)
 
-$(info    VAR is $(OBJ_SRCS))
+# $(info    VAR is $(OBJ_SRCS))
 
 all: $(NAME)
 
 $(NAME): $(OBJ_SRCS)
+	make -C ./libft
+	cp libft/libft.a $(NAME)
 	ar rc $(NAME) $(OBJ_SRCS)
 
-# clean:
-# 	rm -rf $(OBJ_SRCS)
+clean:
+	make -C ./libft clean
+	rm -rf $(OBJ_SRCS)
 
-# fclean: clean
-# 	rm -rf $(NAME)
+fclean: clean
+	make -C ./libft fclean
+	rm -rf $(NAME)
 
-# re: fclean all
+re: fclean all
