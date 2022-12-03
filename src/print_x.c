@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:19:13 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 11:00:02 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:28:42 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	print_x(t_var_print *var, unsigned int num)
 	int		count;
 
 	count = 0;
-	res = ft_itoa_hex(num);
-	if (var->flagdot && (var->precision > (int)ft_strlen(res) || res[0] == '0'))
+	res = ft_itoa_hex((unsigned long long)num);
+	if (var->flagdot && var->precision > (int)ft_strlen(res))
 	{
 		tmp = ft_num_with_precision(var, res);
 		free(res);
@@ -47,7 +47,7 @@ int	print_x(t_var_print *var, unsigned int num)
 		free (res);
 		res = tmp;
 	}
-	if (var->flaghash)
+	if (var->flaghash && res[0] != '0')
 	{
 		tmp = ft_add_sign_space(res, "0x");
 		res = tmp;

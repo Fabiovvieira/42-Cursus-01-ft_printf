@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:47:56 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 09:59:00 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:55:06 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int	print_s(t_var_print *var, char *str)
 	else
 		res = ft_strdup(str);
 	if (var->flagdot && var->precision < (int)ft_strlen(str))
-		res = ft_str_with_precision(var, str);
+	{
+		tmp = ft_str_with_precision(var, res);
+		free (res);
+		res = tmp;
+	}
 	if (var->flagminus)
 	{
 		tmp = ft_right_pad_space(var, res);

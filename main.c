@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 22:02:48 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 10:41:37 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:37:17 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(void)
 	// int c = 12;
 	// d = &c;
 
-	a = ft_printf("|%d|\n", INT_MIN);
-	b = printf("|%d|\n", INT_MIN);
+	a = ft_printf("|%#x|\n", 0);
+	b = printf("|%#x|\n", 0);
 	printf("%d\n",a);
 	printf("%d\n",b);
 	return(0);

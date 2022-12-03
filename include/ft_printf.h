@@ -23,6 +23,7 @@
 # define SPECIFIER "cspdiuxX%"
 
 typedef struct s_var_print {
+	int		isnumneg;
 	int		flagzero;
 	int		precision;
 	int		flagdot;

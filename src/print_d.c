@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:43:19 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 10:50:30 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:06:26 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ int	print_d(t_var_print *var, int num)
 
 	count = 0;
 	if (num < 0)
+	{
 		res = ft_itoa(((long)num) * -1);
+		var->isnumneg = 1;
+	}
 	else
 		res = ft_itoa((long)num);
-	if (var->flagdot && (var->precision > (int)ft_strlen(res) || res[0] == '0'))
+	if (var->flagdot && var->precision > (int)ft_strlen(res))
 	{
 		tmp = ft_num_with_precision(var, res);
 		free(res);
@@ -35,13 +38,10 @@ int	print_d(t_var_print *var, int num)
 		free (res);
 		res = tmp;
 	}
-	else
+	if (num < 0)
 	{
-		if (num < 0)
-		{
-			tmp = ft_add_sign_space(res, "-");
-			res = tmp;
-		}
+		tmp = ft_add_sign_space(res, "-");
+		res = tmp;
 	}
 	if (var->flagplus)
 	{

@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:04:29 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 11:28:52 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:05:11 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_left_pad_space(t_var_print *var, char *res)
 	tmp = ft_strdup(res);
 	if (var->width > size)
 	{
+		free(tmp);
 		tmp = (char *)malloc(sizeof(char) * (var->width + 1));
 		while (i < (var->width - size))
 			*(tmp + i++) = ' ';
@@ -46,6 +47,7 @@ char	*ft_right_pad_space(t_var_print *var, char *res)
 	tmp = ft_strdup(res);
 	if (var->width > size)
 	{
+		free(tmp);
 		tmp = (char *)malloc(sizeof(char) * (var->width + 1));
 		while (i < size)
 			*(tmp + i++) = *(res++);
@@ -66,9 +68,12 @@ char	*ft_left_pad_zero(t_var_print *var, char *res)
 	size = ft_strlen(res);
 	if ((var->specifier == 'x' || var->specifier == 'x') && var->flaghash)
 		size += 2;
+	if (var->isnumneg)
+		var->width--;
 	tmp = ft_strdup(res);
 	if (var->width > size)
 	{
+		free(tmp);
 		tmp = (char *)malloc(sizeof(char) * (var->width + 1));
 		while (i < (var->width - size))
 			*(tmp + i++) = '0';
@@ -86,8 +91,6 @@ char	*ft_num_with_precision(t_var_print *var, char *res)
 	int		i;
 
 	i = 0;
-	if (res[0] == '0')
-		return (ft_strdup(""));
 	size = ft_strlen(res);
 	tmp = (char *)malloc(sizeof(char) * (var->precision + 1));
 	while (i < (var->precision - size))

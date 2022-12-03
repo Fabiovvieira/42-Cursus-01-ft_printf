@@ -18,6 +18,7 @@
 
 void	init_var(t_var_print *var)
 {
+	var->isnumneg = 0;
 	var->flagzero = 0;
 	var->precision = 0;
 	var->flagdot = 0;
