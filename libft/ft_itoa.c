@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_itoa_len(int n)
+static int	ft_itoa_len(long n)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ static int	ft_itoa_len(int n)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long n)
 {
 	int		len;
 	long	num;
@@ -58,7 +58,7 @@ char	*ft_itoa(int n)
 int	main(void)
 {
 	printf("num =%d | string =%s\n", ft_itoa_len(0), ft_itoa(0));
-	printf("num =%d | string =%s\n", ft_itoa_len(-2147483648), 
+	printf("num =%d | string =%s\n", ft_itoa_len(-2147483648),
 	ft_itoa(-2147483648));
 	printf("num =%d | string =%s\n", ft_itoa_len(2147483647), ft_itoa(2147483647));
 	printf("num =%d | string =%s\n", ft_itoa_len(-21474), ft_itoa(-21474));

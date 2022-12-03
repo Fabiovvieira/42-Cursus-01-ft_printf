@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:19:13 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/02 14:28:50 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 11:00:02 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static void	ft_str_toupper(char **s)
 	}
 }
 
-int		print_xX(t_var_print *var, unsigned int num)
+int	print_x(t_var_print *var, unsigned int num)
 {
 	char	*res;
 	char	*tmp;
+	int		count;
 
+	count = 0;
 	res = ft_itoa_hex(num);
 	if (var->flagdot && (var->precision > (int)ft_strlen(res) || res[0] == '0'))
 	{
@@ -64,6 +66,7 @@ int		print_xX(t_var_print *var, unsigned int num)
 	}
 	if (var->specifier == 'X')
 		ft_str_toupper(&res);
-	write(1, res, ft_strlen(res));
-	return (ft_strlen(res));
+	count = write(1, res, ft_strlen(res));
+	free(res);
+	return (count);
 }

@@ -6,12 +6,11 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 09:47:56 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/02 10:16:21 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 09:59:00 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 static char	*ft_str_with_precision(t_var_print *var, char *res)
 {
@@ -19,7 +18,7 @@ static char	*ft_str_with_precision(t_var_print *var, char *res)
 	int		i;
 
 	i = 0;
-	tmp = (char *)malloc(sizeof(char)* (var->precision + 1));
+	tmp = (char *)malloc(sizeof(char) * (var->precision + 1));
 	while (i < var->precision)
 		*(tmp + i++) = *(res++);
 	*(tmp + i) = '\0';
@@ -30,8 +29,13 @@ int	print_s(t_var_print *var, char *str)
 {
 	char	*res;
 	char	*tmp;
+	int		count;
 
-	res = ft_strdup(str);
+	count = 0;
+	if (str == NULL)
+		res = ft_strdup("(null)");
+	else
+		res = ft_strdup(str);
 	if (var->flagdot && var->precision < (int)ft_strlen(str))
 		res = ft_str_with_precision(var, str);
 	if (var->flagminus)
@@ -46,6 +50,7 @@ int	print_s(t_var_print *var, char *str)
 		free (res);
 		res = tmp;
 	}
-	write(1, res, ft_strlen(res));
-	return (ft_strlen(res));
+	count = write(1, res, ft_strlen(res));
+	free(res);
+	return (count);
 }

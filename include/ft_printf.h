@@ -23,7 +23,6 @@
 # define SPECIFIER "cspdiuxX%"
 
 typedef struct s_var_print {
-	int		res;
 	int		flagzero;
 	int		precision;
 	int		flagdot;
@@ -49,7 +48,7 @@ int		print_u(t_var_print *var, unsigned int num);
 
 int		print_d(t_var_print *var, int num);
 
-int		print_xX(t_var_print *var, unsigned int num);
+int		print_x(t_var_print *var, unsigned int num);
 
 char	*ft_left_pad_space(t_var_print *var, char *res);
 

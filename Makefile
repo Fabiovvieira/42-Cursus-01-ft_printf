@@ -33,6 +33,8 @@ $(NAME): $(OBJ_SRCS)
 	cp libft/libft.a $(NAME)
 	ar rc $(NAME) $(OBJ_SRCS)
 
+bonus: $(NAME)
+
 clean:
 	make -C ./libft clean
 	rm -rf $(OBJ_SRCS)
