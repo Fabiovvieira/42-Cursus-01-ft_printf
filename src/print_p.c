@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:03 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 10:26:31 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:24:13 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,10 @@ char	*ft_itoa_hex(unsigned long long n)
 	return (nb);
 }
 
-int	print_p(t_var_print *var, unsigned long long hex)
+static char	*deal_with_minus(t_var_print *var, char *res)
 {
-	char	*num;
-	char	*res;
 	char	*tmp;
-	int		count;
 
-	count = 0;
-	if (hex == 0)
-		res = ft_strdup("(nil)");
-	else
-	{
-		num = ft_itoa_hex(hex);
-		res = ft_strjoin("0x", num);
-		free(num);
-	}
 	if (var->flagminus)
 	{
 		tmp = ft_right_pad_space(var, res);
@@ -78,6 +66,25 @@ int	print_p(t_var_print *var, unsigned long long hex)
 		free (res);
 		res = tmp;
 	}
+	return (res);
+}
+
+int	print_p(t_var_print *var, unsigned long long hex)
+{
+	char	*num;
+	char	*res;
+	int		count;
+
+	count = 0;
+	if (hex == 0)
+		res = ft_strdup("(nil)");
+	else
+	{
+		num = ft_itoa_hex(hex);
+		res = ft_strjoin("0x", num);
+		free(num);
+	}
+	res = deal_with_minus(var, res);
 	count = write(1, res, ft_strlen(res));
 	free(res);
 	return (count);

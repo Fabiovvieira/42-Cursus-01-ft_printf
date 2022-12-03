@@ -6,26 +6,45 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:43:19 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 17:48:55 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:19:44 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_d(t_var_print *var, int num)
+static char	*deal_with_plus_space_minus(t_var_print *var, char *res, int num)
 {
-	char	*res;
 	char	*tmp;
-	int		count;
 
-	count = 0;
-	if (num < 0)
+	if (var->flagplus && num >= 0)
 	{
-		res = ft_itoa(((long)num) * -1);
-		var->isnumneg = 1;
+		tmp = ft_add_sign_space(res, "+");
+		res = tmp;
+	}
+	else if (var->flagspace && num >= 0)
+	{
+		tmp = ft_add_sign_space(res, " ");
+		res = tmp;
+	}
+	if (var->flagminus)
+	{
+		tmp = ft_right_pad_space(var, res);
+		free (res);
+		res = tmp;
 	}
 	else
-		res = ft_itoa((long)num);
+	{
+		tmp = ft_left_pad_space(var, res);
+		free (res);
+		res = tmp;
+	}
+	return (res);
+}
+
+static char	*deal_with_dot_zero(t_var_print *var, char *res, int num)
+{
+	char	*tmp;
+
 	if (var->flagdot && var->precision > (int)ft_strlen(res))
 	{
 		tmp = ft_num_with_precision(var, res);
@@ -43,34 +62,24 @@ int	print_d(t_var_print *var, int num)
 		tmp = ft_add_sign_space(res, "-");
 		res = tmp;
 	}
-	if (var->flagplus)
+	return (res);
+}
+
+int	print_d(t_var_print *var, int num)
+{
+	char	*res;
+	int		count;
+
+	count = 0;
+	if (num < 0)
 	{
-		if (num >= 0)
-		{
-			tmp = ft_add_sign_space(res, "+");
-			res = tmp;
-		}
-	}
-	else if (var->flagspace)
-	{
-		if (num >= 0)
-		{
-			tmp = ft_add_sign_space(res, " ");
-			res = tmp;
-		}
-	}
-	if (var->flagminus)
-	{
-		tmp = ft_right_pad_space(var, res);
-		free (res);
-		res = tmp;
+		res = ft_itoa(((long)num) * -1);
+		var->isnumneg = 1;
 	}
 	else
-	{
-		tmp = ft_left_pad_space(var, res);
-		free (res);
-		res = tmp;
-	}
+		res = ft_itoa((long)num);
+	res = deal_with_dot_zero(var, res, num);
+	res = deal_with_plus_space_minus(var, res, num);
 	count = write(1, res, ft_strlen(res));
 	free(res);
 	return (count);

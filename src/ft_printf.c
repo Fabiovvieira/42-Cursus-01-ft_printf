@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
 #include "ft_printf.h"
-
-// The overall syntax of a conversion specification is:
-//            %[$][flags][width][.precision]conversion
 
 void	init_var(t_var_print *var)
 {
@@ -49,11 +45,10 @@ int	ft_print_conversion(va_list *arg, t_var_print *var)
 	return (0);
 }
 
-int	read_format(char const **format, va_list *arg, t_var_print *var)
+static void	read_format_flag(char const **format, t_var_print *var)
 {
-	int	count;
-
-	while (!(ft_strchr(SPECIFIER, **format)) && !(**format >= '1' && **format <= '9') && **format != '.')
+	while (!(ft_strchr(SPECIFIER, **format))
+		&& !(**format >= '1' && **format <= '9') && **format != '.')
 	{
 		if (**format == '-')
 			var->flagminus = 1;
@@ -67,13 +62,21 @@ int	read_format(char const **format, va_list *arg, t_var_print *var)
 			var->flagzero = 1;
 		(*format)++;
 	}
+}
+
+int	read_format(char const **format, va_list *arg, t_var_print *var)
+{
+	int	count;
+
+	read_format_flag(format, var);
 	while (!(ft_strchr(SPECIFIER, **format)) && **format != '.')
 	{
 		if (**format >= '0' && **format <= '9')
 			var->width = var->width * 10 + (**format - 48);
 		(*format)++;
 	}
-	while (!(ft_strchr(SPECIFIER, **format)) && !(**format >= '0' && **format <= '9'))
+	while (!(ft_strchr(SPECIFIER, **format))
+		&& !(**format >= '0' && **format <= '9'))
 	{
 		if (**format == '.')
 			var->flagdot = 1;
@@ -118,18 +121,3 @@ int	ft_printf(const char *format, ...)
 	va_end(arg);
 	return (count);
 }
-
-// int	main(void)
-// {
-// 	int	a;
-// 	int	b;
-// 	// int *d;
-// 	// int c = 12;
-// 	// d = &c;
-
-// 	a = ft_printf("|%#10.5x|\n", 100);
-// 	b = printf("|%#10.5x|\n", 100);
-// 	printf("%d\n",a);
-// 	printf("%d\n",b);
-// 	return(0);
-// }
