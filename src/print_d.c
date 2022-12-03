@@ -6,7 +6,7 @@
 /*   By: fvalli-v <fvalli-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:43:19 by fvalli-v          #+#    #+#             */
-/*   Updated: 2022/12/03 17:06:26 by fvalli-v         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:48:55 by fvalli-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,6 @@ int	print_d(t_var_print *var, int num)
 			tmp = ft_add_sign_space(res, "+");
 			res = tmp;
 		}
-		// else
-		// {
-		// 	tmp = ft_add_sign_space(res, "-");
-		// 	res = tmp;
-		// }
 	}
 	else if (var->flagspace)
 	{

@@ -24,8 +24,6 @@ SRCS = $(addprefix ${SRCDIR}, ${SRC})
 
 OBJ_SRCS = $(SRCS:.c=.o)
 
-# $(info    VAR is $(OBJ_SRCS))
-
 all: $(NAME)
 
 $(NAME): $(OBJ_SRCS)
