@@ -27,7 +27,7 @@ OBJ_SRCS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ_SRCS)
-	make -C ./libft
+	make bonus -C ./libft
 	cp libft/libft.a $(NAME)
 	ar rc $(NAME) $(OBJ_SRCS)
 
