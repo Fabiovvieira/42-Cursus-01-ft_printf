@@ -18,8 +18,8 @@ int	main(void)
 	int	a;
 	int	b;
 
-	a = ft_printf("|%#x|\n", 0);
-	b = printf("|%#x|\n", 0);
+	a = ft_printf("|%0#+-#x|\n", 0);
+	b = printf("|%0#+-#x|\n", 0);
 	printf("%d\n", a);
 	printf("%d\n", b);
 	return (0);
